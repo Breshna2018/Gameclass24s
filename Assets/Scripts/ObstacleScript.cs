@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleScript : MonoBehaviour
 {
 
-
+    // New Comments
     public float jumpForce = 2;
 
     private void OnCollisionEnter(Collision collision)
