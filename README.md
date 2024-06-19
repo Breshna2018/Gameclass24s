@@ -52,6 +52,47 @@ public class mainMenu : MonoBehaviour
 
     
 }
-  
 
- 
+6/15
+add audiosoure and also game has 10 obstcles each obstcle has deffernt jump value.if car teach or pump obstcle will jump  also some obstcles does not have any jump valu if car pump not show any rection
+ this code 
+  
+ using UnityEngine;
+
+public class CollisionHandler : MonoBehaviour
+{
+    public float jumpForce = 2;// jump valu has deffernt in each obstcle
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        // Get the AudioSource component
+        audioSource = GetComponent<AudioSource>();
+
+        // Optional: Check if audioSource is assigned
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component is missing from this GameObject.");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Collided");
+
+            // Play the collision sound
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            Rigidbody goRB = collision.gameObject.GetComponent<Rigidbody>();
+            if (goRB != null)
+            {
+                goRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+        }
+    }
+}
